@@ -30,8 +30,6 @@ RSpec.describe User do
       user.password = ""
       user.save.should be false
     end
-
-    pending('no blank password_confirmation')
   end
 
   describe 'when name is allready used' do
@@ -53,6 +51,14 @@ RSpec.describe User do
         user_first.email = email
         user_second.name = email
         user_second.should be_valid
+      end
+    end
+
+    it 'not valid' do
+      addresses = %w[spamspamspam.de heman,test.com]
+      addresses.each do |email|
+        user_second.email = email
+        user_second.should_not be_valid
       end
     end
   end
