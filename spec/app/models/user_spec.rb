@@ -17,4 +17,21 @@ RSpec.describe User do
     user.job_offers.build(attributes_for(:job_offer))
     user.job_offers.size.should == 1
   end
+
+  pending('no blank name')
+  pending('no blank email')
+
+  describe 'Passwords' do
+    pending('no blank passwords')
+    pending('no blank password_confirmation')
+  end
+
+  describe 'when name is allready used' do
+    pending('should not be saved')
+  end
+
+  describe 'email address' do
+    pending('valid')
+    pending('not valid')
+  end
 end
