@@ -2,6 +2,8 @@ require 'spec_helper'
 
 RSpec.describe User do
   let(:user) { build(:user) }
+  let(:user_first) { build(:user, name: 'Marc') }
+  let(:user_second) { build(:user, name: 'Marc') }
   let(:job_offer) { {:title => 'Padrino Engeneer', :location => 'Berlin',
     :description => 'Come and kiss my ass!'} }
 
@@ -18,20 +20,40 @@ RSpec.describe User do
     user.job_offers.size.should == 1
   end
 
-  pending('no blank name')
-  pending('no blank email')
+  it 'should have no blank name' do
+    user.name = ""
+    user.save.should be false
+  end
 
   describe 'Passwords' do
-    pending('no blank passwords')
+    it 'should have no blank passwords' do
+      user.password = ""
+      user.save.should be false
+    end
+
     pending('no blank password_confirmation')
   end
 
   describe 'when name is allready used' do
-    pending('should not be saved')
+
+    it 'should not be saved' do
+      user_second.save.should be false
+    end
   end
 
   describe 'email address' do
-    pending('valid')
-    pending('not valid')
+    it 'should have no blank email' do
+      user.email = ""
+      user.save.should be false
+    end
+
+    it 'valid' do
+      addresses = %w[thor@marvel.de hero@movie.com]
+      addresses.each do |email|
+        user_first.email = email
+        user_second.name = email
+        user_second.should be_valid
+      end
+    end
   end
 end
