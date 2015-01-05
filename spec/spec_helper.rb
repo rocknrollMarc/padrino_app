@@ -5,6 +5,7 @@ Dir[File.expand_path(File.dirname(__FILE__) + "/../app/helpers/**/*.rb")].each(&
 
 RSpec.configure do |conf|
   conf.include Rack::Test::Methods
+  conf.include FactoryGirl::Syntax::Methods
   conf.expect_with :rspec do |c|
     c.syntax = [:expect, :should]
   end
